@@ -1,15 +1,15 @@
 <?php
 session_start();
-$host = 'localhost';
 $db = 'contact_person';
+$host = 'localhost';
 $user = 'root';
 $pass = '';
 $dsn = "mysql:host=$host;dbname=$db";
 
 try 
 {
-    $pdo = new PDO($dsn, $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbh = new PDO($dsn, $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } 
 catch (PDOException $e) 
 {

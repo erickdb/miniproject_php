@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']))
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $stmt = $pdo->prepare("SELECT id, full_name, email, password, role FROM users WHERE email = :email");
+        $stmt = $dbh->prepare("SELECT id, full_name, email, password, role FROM users WHERE email = :email");
         $stmt->execute(array(':email' => $email));
         $user = $stmt->fetch();
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']))
         else 
         {
             // Check if the email is already registered
-            $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+            $stmt = $dbh->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
             $stmt->execute(array(':email' => $email));
             $count = $stmt->fetchColumn();
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']))
             {
                 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                $stmt = $pdo->prepare("INSERT INTO users (full_name, email, password, role) VALUES (:full_name, :email, :password, :role)");
+                $stmt = $dbh->prepare("INSERT INTO users (full_name, email, password, role) VALUES (:full_name, :email, :password, :role)");
                 $stmt->execute(array(':full_name' => $full_name, ':email' => $email, ':password' => $hashedPassword, ':role' => $role));
                 header("Location: form_login.php");
             } 
