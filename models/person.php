@@ -1,6 +1,6 @@
 <?php
 // variable ps = prepare statmen
-class Produk{
+class contact_person{
     //member1 variabel
 	private $koneksi;
 	//member2 konstruktor
@@ -9,11 +9,11 @@ class Produk{
 		$this->koneksi = $dbh;
 	}
     //member3 fungsionalitas
-    public function index(){
+    public function index(){  //index
         //$sql = "SELECT * FROM produk";
-        $sql = "SELECT produk.*, jenis.nama AS kategori
-                FROM produk INNER JOIN jenis
-                ON jenis.id = produk.idjenis ORDER BY produk.id DESC";
+        $sql = "SELECT person.*, agama.nama AS agama
+                FROM person INNER JOIN agama
+                ON agama.id = person.idagama ORDER BY person.id DESC";
         //$resault = $this->koneksi->query($sql);
         //PDO prepare statement
 		$ps = $this->koneksi->prepare($sql);
@@ -22,49 +22,38 @@ class Produk{
 		return $resault;
     }
 
-    public function simpan($data){
-        $sql = "INSERT INTO produk (kode,nama,kondisi,harga,stok,idjenis,foto)
-                VALUES (?,?,?,?,?,?,?)";
+    public function createPerson($data){ //simpan
+        $sql = "INSERT INTO person (nama,gender,tempat_lahir,tanggal_lahir,alamat,hp,email,kampus,sosmed,idagama,foto)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         //PDO prepare statement
 		$ps = $this->koneksi->prepare($sql);
 		$ps->execute($data);
     }
 
-    public function getProduk($id){
-        $sql = "SELECT produk.*, jenis.nama AS kategori
-                FROM produk INNER JOIN jenis
-                ON jenis.id = produk.idjenis WHERE produk.id = ?";
-        //PDO prepare statement
+    public function readPerson(){  //index
+        //$sql = "SELECT * FROM produk";
+        $sql = "SELECT person.*, agama.nama AS agama
+                FROM person INNER JOIN agama
+                ON agama.id = person.idagama ORDER BY person.id = ?";
 		$ps = $this->koneksi->prepare($sql);
-		$ps->execute([$id]);
-		$resault = $ps->fetch();
+		$ps->execute();
+		$resault = $ps->fetchAll();
 		return $resault;
     }
 
-    public function ubah($data){
-        $sql = "UPDATE produk SET kode=?,nama=?,kondisi=?,harga=?,stok=?,idjenis=?,foto=?
+    public function updatePerson($data){
+        $sql = "UPDATE person SET nama=?,gender=?,tempat_lahir=?,tanggal_lahir=?,alamat=?,hp=?,email=?,kampus=?,sosmed=?,idagama=?,foto=?
                 WHERE id = ?";
         //PDO prepare statement
 		$ps = $this->koneksi->prepare($sql);
 		$ps->execute($data);
     }
 
-    public function hapus($id){
-        $sql = "DELETE FROM produk WHERE id = ?";
+    public function deletePerson($id){
+        $sql = "DELETE FROM person WHERE id = ?";
         //PDO prepare statement
 		$ps = $this->koneksi->prepare($sql);
 		$ps->execute([$id]);
     }
 
-    public function cari($keyword){
-        $sql = "SELECT produk.*, jenis.nama AS kategori
-                FROM produk INNER JOIN jenis
-                ON jenis.id = produk.idjenis 
-                WHERE produk.nama LIKE '%$keyword%' OR 
-                jenis.nama LIKE '%$keyword%' OR 
-                produk.kondisi LIKE '%$keyword%'";
-       
-        $resault = $this->koneksi->query($sql);
-        return $resault;
-    }
 }
