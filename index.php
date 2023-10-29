@@ -13,6 +13,7 @@
         include_once 'includes/config.php';
         include_once 'includes/functions.php';
         include_once 'models/person.php';
+        include_once 'models/agama.php';
         //potongan2 layout web
         include_once 'view/header.php';
         include_once 'view/navbar.php';

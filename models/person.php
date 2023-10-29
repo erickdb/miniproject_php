@@ -30,6 +30,20 @@ class contact_person{
 		$ps->execute($data);
     }
 
+    public function getPersonById($id) {
+        $sql = "SELECT person.*, agama.nama AS agama
+                FROM person INNER JOIN agama
+                ON agama.id = person.idagama
+                WHERE person.id = :id";
+
+        $ps = $this->koneksi->prepare($sql);
+        $ps->bindParam(':id', $id, PDO::PARAM_INT);
+        $ps->execute();
+        $result = $ps->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     public function readPerson(){  //index
         //$sql = "SELECT * FROM produk";
         $sql = "SELECT person.*, agama.nama AS agama

@@ -6,14 +6,14 @@ if(isset($_SESSION['role'])) {
     <?php
 //buat array scalar judul kolom
 $ar_judul = ['NO','NAMA','GENDER','TEMPAT LAHIR','TANGGAL LAHIR','ALAMAT','NO HP','EMAIL','KAMPUS','SOSMED','AGAMA','FOTO','ACTION'];
-//ciptakan object dari class Produk
+//ciptakan object dari class person
 $obj_person = new contact_person();
 //panggil fungsionalitas terkait
 $rs=$obj_person->index();
 //print_r($rs); die();
 ?>
-<h3>Daftar Produk</h3>
-<a href="index.php?hal=produk_form" class="btn btn-primary">Tambah</a>
+<h3>Daftar person</h3>
+<a href="index.php?hal=person_form_create" class="btn btn-primary">Tambah</a>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -40,7 +40,7 @@ $rs=$obj_person->index();
 				<td><?= $person['email'] ?></td>
 				<td><?= $person['kampus'] ?></td>
 				<td><?= $person['sosmed'] ?></td>
-				<td><?= $person['idagama'] ?></td>
+				<td><?= $person['agama'] ?></td>
 				<td width="15%">
 					<?php
 					if(!empty($person['foto'])){
@@ -53,21 +53,18 @@ $rs=$obj_person->index();
 						<img src="images/nophoto.jpg" width="50%" />
 					<?php } ?>	
 				</td>
-        <td>
-					<form method="POST" action="produk_controller.php">
-					<a href="index.php?hal=produk_detail&id=<?= $person['id'] ?>" 
-					   title="Detail Produk" class="btn btn-info btn-sm">
-						<i class="bi bi-eye"></i>
-					</a>
-					<a href="index.php?hal=produk_form&id=<?= $person['id'] ?>" 
-					   title="Ubah Produk" class="btn btn-warning btn-sm">
+        		<td>
+					<form method="POST" action="person_controller.php">
+					<!-- <a href="index.php?hal=person_form_update&id=" 
+					   title="Ubah person" class="btn btn-warning btn-sm">
 						<i class="bi bi-pencil"></i>
-					</a>
-					<button type="submit" title="Hapus Produk" class="btn btn-danger btn-sm"
-					    name="proses" value="hapus" onclick="return confirm('Anda Yakin diHapus?')">
+					</a> -->
+					<a  href="?hal=person_form_update&id=<?php echo $person['id'];?>" class="btn btn-warning">
+						<i class="bi bi-pencil"></i>
+					</a> 
+					<a onclick="return confirm ('Anda Yakin Ingin Menghapus Data Ini?')" href="?hal=person_form_delete&id=<?php echo $person['id'];?>" class="btn btn-danger">
 						<i class="bi bi-trash"></i>
-					</button>
-					<input type="hidden" name="id" value="<?= $person['id'] ?>" /> 
+					</a> 
 					</form>
 				</td>
 			</tr>
@@ -84,13 +81,13 @@ $rs=$obj_person->index();
   <?php
     //buat array scalar judul kolom
 $ar_judul = ['NO','NAMA','GENDER','TEMPAT LAHIR','TANGGAL LAHIR','ALAMAT','NO HP','EMAIL','KAMPUS','SOSMED','AGAMA','FOTO'];
-//ciptakan object dari class Produk
+//ciptakan object dari class person
 $obj_person = new contact_person();
 //panggil fungsionalitas terkait
 $rs=$obj_person->index();
 //print_r($rs); die();
 ?>
-<h3>Daftar Produk</h3>
+<h3>Daftar person</h3>
 <table class="table table-striped">
 	<thead>
 		<tr>

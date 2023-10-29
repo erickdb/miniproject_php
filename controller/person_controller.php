@@ -22,22 +22,22 @@ $data = [
     $tanggal_lahir, // ? 4
     $alamat, // ? 5
     $hp, // ? 6
-    $email, // ? 6
-    $kampus, // ? 6
-    $sosmed, // ? 6
-    $idagama, // ? 6
-    $foto, // ? 7
+    $email, // ? 7
+    $kampus, // ? 8
+    $sosmed, // ? 9
+    $idagama, // ? 10
+    $foto, // ? 11
 ];
 //3. eksekusi tombol
-$obj_produk = new contact_person();
+$obj_person = new contact_person();
 switch ($tombol) {
-    case 'simpan': $obj_produk->createPerson($data); break;
+    case 'simpan': $obj_person->createPerson($data); break;
     case 'ubah': 
         $data[] = $_POST['idx']; ; // tambah array ? ke-8 dari hidden field idx
-        $obj_produk->updatePerson($data); break;
-    case 'hapus': $obj_produk->deletePerson($_POST['id']); break; //$_POST['id'] dari hidden field di tombol hapus
+        $obj_person->updatePerson($data); break;
+    case 'hapus': $obj_person->deletePerson($_POST['id']); break; //$_POST['id'] dari hidden field di tombol hapus
 
     default: header('location:index.php?hal=contact_person'); break;
 }
-//4. setelah selasai arahkan ke hal produk
+//4. setelah selasai arahkan ke hal person
 header('location:index.php?hal=contact_person');
