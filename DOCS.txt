@@ -1,2 +1,8 @@
-Akun Admin
-Akun User
+Akun Admin (
+    admin@gmail.com
+    12345678
+)
+Akun User (
+    user@gmail.com
+    12345678
+)
