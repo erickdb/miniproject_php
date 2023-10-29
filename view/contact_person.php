@@ -13,7 +13,7 @@ $rs=$obj_person->index();
 //print_r($rs); die();
 ?>
 <h3>Daftar person</h3>
-<a href="index.php?hal=person_form_create" class="btn btn-primary">Tambah</a>
+<a href="index.php?hal=person_form_create" class="btn btn-warning text-dark fs-6"><b>Tambah</b></a>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -41,24 +41,20 @@ $rs=$obj_person->index();
 				<td><?= $person['kampus'] ?></td>
 				<td><?= $person['sosmed'] ?></td>
 				<td><?= $person['agama'] ?></td>
-				<td width="15%">
+				<td width="5%">
 					<?php
 					if(!empty($person['foto'])){
 					?>
-						<img src="images/<?= $person['foto'] ?>" width="50%" />
+						<img src="images/<?= $person['foto'] ?>" width="100%" />
 					<?php
 					}
 					else{
 					?>
-						<img src="images/nophoto.jpg" width="50%" />
+						<img src="images/nophoto.jpg" width="100%" />
 					<?php } ?>	
 				</td>
-        		<td>
+        		<td width="3%">
 					<form method="POST" action="person_controller.php">
-					<!-- <a href="index.php?hal=person_form_update&id=" 
-					   title="Ubah person" class="btn btn-warning btn-sm">
-						<i class="bi bi-pencil"></i>
-					</a> -->
 					<a  href="?hal=person_form_update&id=<?php echo $person['id'];?>" class="btn btn-warning">
 						<i class="bi bi-pencil"></i>
 					</a> 
@@ -115,16 +111,16 @@ $rs=$obj_person->index();
 				<td><?= $person['kampus'] ?></td>
 				<td><?= $person['sosmed'] ?></td>
 				<td><?= $person['idagama'] ?></td>
-				<td width="15%">
+				<td width="5%">
 					<?php
 					if(!empty($person['foto'])){
 					?>
-						<img src="images/<?= $person['foto'] ?>" width="50%" />
+						<img src="images/<?= $person['foto'] ?>" width="100%" />
 					<?php
 					}
 					else{
 					?>
-						<img src="images/nophoto.jpg" width="50%" />
+						<img src="images/nophoto.jpg" width="100" />
 					<?php } ?>	
 				</td>
 			</tr>

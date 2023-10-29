@@ -86,7 +86,7 @@
                     <label for="">Agama</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <select name="agama" class="form-control show-tick" id="">
+                            <select name="idagama" class="form-control show-tick" id="">
                                 <option value="">--Pilih Agama--</option>
                                 <option value="Islam" <?php if($tampil['idagama']== 1) echo "selected";?>>Islam</option>
                                 <option value="Kristen" <?php if($tampil['idagama']== 2) echo "selected";?>>Kristen</option>
@@ -109,13 +109,14 @@
                         </div>
                     </div>
 
-                    <input type="submit" name="simpan" value="Simpan" class="btn btn-primary mt-5">
+                    <button class="btn btn-success" name="proses" type="submit" value="ubah">Ubah</button>
+                    <input type="hidden" name="idx" value="<?= $id ?>" />
                 </form>
 
                 <?php
-                if (isset($_POST['simpan']) && isset($_POST['idagama'])) {
+                if (isset($_POST['proses']) && isset($_POST['idagama'])) {
 
-                    $obj_person = new contact_person();
+                    $obj_person = new contact_person(); 
 
                     $nama = $_POST['nama'];
                     $gender = $_POST['gender'];
@@ -133,14 +134,20 @@
                     }elseif ($idagama=="Kristen"){
                         $value_agama = 2;
 
-                    }elseif ($idagama=="Budha"){
+                    }elseif ($idagama=="Buddha"){
                         $value_agama = 3;
                     }elseif ($idagama=="Hindu"){
                         $value_agama = 4;
                     }
+
+                    // Perbarui foto hanya jika ada file yang diunggah
                     $foto = $_FILES['foto']['name'];
                     $lokasi = $_FILES['foto']['tmp_name'];
                     $upload = move_uploaded_file($lokasi, "images/" . $foto);
+                    unlink("images/".$tampil['foto']);
+
+                    // Periksa apakah foto diunggah, jika tidak, gunakan foto lama
+                    $fotoToUpdate = $upload ? $foto : $tampil['foto'];
 
                     $data = [
                         $nama, // ? 1
@@ -149,43 +156,24 @@
                         $tanggal_lahir, // ? 4
                         $alamat, // ? 5
                         $hp, // ? 6
-                        $email, // ? 6
-                        $kampus, // ? 6
-                        $sosmed, // ? 6
-                        $value_agama, // ? 6
-                        $foto, // ? 7
+                        $email, // ? 7 
+                        $kampus, // ? 8 
+                        $sosmed, // ? 9 
+                        $value_agama, // ? 10 
+                        $fotoToUpdate, // ? 11 
+                        $id_to_edit // ? 12
                     ];
-
-                    if (!empty($lokasi)) //lokasi foto ada
-                    {
-                        $upload = move_uploaded_file($lokasi, "images/" . $foto);
-                        $obj_person = new contact_person();
-                        $sql = $obj_person->updatePerson($data);
-
-                        
-                        if ($sql) {
-                ?>
-                            <script type="text/javascript">
-                                alert("Data Berhasil di Simpan");
-                                window.location.href = "?hal=contact_person";
-                            </script>
-                        <?php
-                        }
-                    } else //lokasi foto ga ada
-                    {
-                        $obj_person = new contact_person();
-                        $sql = $obj_person->updatePerson($data);
-                        if ($sql) {
-                        ?>
-                            <script type="text/javascript">
-                                alert("Data Berhasil di Simpan");
-                                window.location.href = "?hal=contact_person";
-                            </script>
-                    <?php
-                        }
-                    }
+                
+                    // Perbarui data dengan memanggil fungsi updatePerson
+                    $obj_person = new contact_person();
+                    $sql = $obj_person->updatePerson($data);
                     ?>
-                <?php
+                    <script type="text/javascript">
+                            alert("Data Berhasil di Simpan");
+                            window.location.href = "?hal=contact_person";
+                    </script>
+                
+                    <?php
                 }
 
                 ?>

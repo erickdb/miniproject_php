@@ -16,36 +16,28 @@ if(!isset($_SESSION['role'])) {
     $hideLogout = '';
     $hideperson = '';
 }
-// if (isset($_SESSION['role'])){
-
-//     if ($_SESSION['role'] == 'admin'){
-//         $linkperson = header("Location: ../view/?hal=admin_person_list");;
-//     } elseif ($_SESSION['role'] == 'user') {
-//         $linkperson = header("Location: ../view/?hal=user_person_list");;
-//     }
-// }
 ?>
 <div class="row">
     <div class="col-md-12">
         <!----------- awal menu ----------------->
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-warning" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">My Web</a>
+                <a class="navbar-brand fs-3" href="#">Contact <b class="text-dark">Person</b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3 fs-6">
                     <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.php?hal=home">Home</a>
+                    <a class="active nav-link" aria-current="page" href="index.php?hal=home">Home</a>
                     </li>
                     <li class="nav-item" <?= $hideperson; ?>>
-                    <a class="nav-link" href="?hal=contact_person" aria-current="page">
+                    <a class="active nav-link" href="?hal=contact_person" aria-current="page">
                         Person
                     </a>
                     </li>
                     <li class="nav-item dropdown" <?=$hideLoginRegister; ?>>
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="active nav-link dropdown-toggle bg-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Login & Register
                         </a>
                         <ul class="dropdown-menu">
@@ -54,7 +46,7 @@ if(!isset($_SESSION['role'])) {
                         </ul>
                     </li>
                     <li class="nav-item" <?= $hideLogout; ?>>
-                        <a class="nav-link" href="logout.php" aria-current="page">
+                        <a class="active nav-link bg-dark" href="logout.php" aria-current="page">
                             Logout
                         </a>
                     </li>

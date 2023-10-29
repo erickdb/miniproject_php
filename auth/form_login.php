@@ -17,7 +17,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-warning">Login</button>
         </form>
         <p>Belum punya akun? <a href="form_register.php">Register</a></p>
         <p>Go To <a href="../index.php">Home Page</a></p>

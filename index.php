@@ -3,19 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tokoku</title>
+    <title>Contact Person</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <?php
         include_once 'includes/config.php';
         include_once 'includes/functions.php';
         include_once 'models/person.php';
         include_once 'models/agama.php';
         //potongan2 layout web
-        include_once 'view/header.php';
+        // include_once 'view/header.php';
         include_once 'view/navbar.php';
         ?>
         <br/>

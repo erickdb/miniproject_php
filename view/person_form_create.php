@@ -79,17 +79,17 @@
                     </div>
 
                     <label for="">Agama</label>
-                        <div class="form-group">
-                            <div class="form-line">
-                                <select name="idagama" class="form-control show-tick" id="">
-                                    <option value="">--Pilih Agama--</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Budha">Budha</option>
-                                    <option value="Hindu">Hindu</option>
-                                </select>
-                            </div>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <select name="idagama" class="form-control show-tick" id="">
+                                <option value="">--Pilih Agama--</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Kristen">Kristen</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Hindu">Hindu</option>
+                            </select>
                         </div>
+                    </div>
 
                     <label for="">Foto</label>
                     <div class="form-group">
@@ -117,19 +117,19 @@
                     $sosmed = $_POST['sosmed'];
                     $idagama = $_POST['idagama'];
                     $value_agama;
-                    if ($idagama=="Islam"){
+                    if ($idagama == "Islam") {
                         $value_agama = 1;
-                    }elseif ($idagama=="Kristen"){
+                    } elseif ($idagama == "Kristen") {
                         $value_agama = 2;
-
-                    }elseif ($idagama=="Budha"){
+                    } elseif ($idagama == "Budha") {
                         $value_agama = 3;
-                    }elseif ($idagama=="Hindu"){
+                    } elseif ($idagama == "Hindu") {
                         $value_agama = 4;
                     }
-                    $foto=$_FILES['foto'] ['name'];
-                    $lokasi=$_FILES['foto']['tmp_name'];
-                    $upload=move_uploaded_file($lokasi, "images/".$foto);
+
+                    $foto = isset($_FILES['foto']['name']) ? $_FILES['foto']['name'] : null; // Periksa apakah file diunggah
+                    $lokasi = isset($_FILES['foto']['tmp_name']) ? $_FILES['foto']['tmp_name'] : null;
+                    $upload = $foto ? move_uploaded_file($lokasi, "images/" . $foto) : false;
 
                     $data = [
                         $nama, // ? 1
@@ -144,17 +144,12 @@
                         $value_agama, // ? 6
                         $foto, // ? 7
                     ];
-
-                    if ($upload){
-                        
-                                ?>
-                                <script type="text/javascript">
-                                alert ("Data Berhasil di Simpan");
-                                window.location.href="?hal=contact_person";
-                                </script>
-                                <?php
-                        }
-                ?>
+                    $sql = $obj_person->createPerson($data);
+                    ?>
+                            <script type="text/javascript">
+                                alert("Data Berhasil di Simpan");
+                                window.location.href = "?hal=contact_person";
+                            </script>
                 <?php
                 }
 
